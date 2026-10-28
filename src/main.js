@@ -155,9 +155,10 @@ function afficherSimilaires() {
 
         if (outil.categorie === outilSelectionne.categorie && outil.id !== outilSelectionne.id && nombre < 3) {
             zoneSimilaires.innerHTML += `
-                <button class="related-card" type="button" data-id="${outil.id}">
+                <button class="cursor-pointer related-card p-4 bg-white rounded-xl border border-fonce transition hover:-translate-y-2" type="button" data-id="${outil.id}">
                     <span class="related-card__name">${outil.nom}</span>
                     <span class="related-card__description">${outil.description}</span>
+                    <div class="mt-4 w-full"><span class="px-4 py-2 rounded-2xl bg-accent">Voir l'outil</span></div>
                 </button>`;
             nombre++;
         }
