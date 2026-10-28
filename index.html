@@ -1,11 +1,85 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Catalogue d'outils</title>
 </head>
-<body>
-    
+<body class="page">
+    <header class="header">
+        <h1 class="header__title">DevTools</h1>
+    </header>
+
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="sidebar__top">
+                <div class="sidebar__heading">
+                    <h2 class="sidebar__title">Catalogue</h2>
+                    <span class="sidebar__count"></span>
+                </div>
+
+                <label class="search">
+                    <span class="search__label">Rechercher un outil</span>
+                    <input class="search__input" type="search" placeholder="Rechercher un outil…">
+                </label>
+
+                <div class="filters">
+                    <button class="filters__chip filters__chip--active" type="button" aria-pressed="true" data-categorie="Tous">Tous</button>
+                </div>
+
+                <button class="toggle" type="button" aria-pressed="false">
+                    <span class="toggle__switch"></span>
+                    Gratuits uniquement
+                </button>
+            </div>
+
+            <div class="sidebar__content">
+                <p class="tool-list__empty" hidden>Aucun outil ne correspond à ces filtres.</p>
+
+                <ul class="tool-list"></ul>
+            </div>
+        </aside>
+
+        <main class="detail">
+            <div class="detail__header">
+                <div class="detail__heading">
+                    <div class="detail__badges">
+                        <span class="badge badge--category"></span>
+                        <span class="badge badge--price"></span>
+                    </div>
+                    <h3 class="detail__title"></h3>
+                </div>
+            </div>
+
+            <p class="detail__description"></p>
+
+            <div class="detail__actions">
+                <a class="btn btn--primary detail__open" href="#">Ouvrir l'outil</a>
+                <button class="btn btn--secondary detail__save" type="button">Enregistrer</button>
+            </div>
+
+            <dl class="detail__infos">
+                <div class="detail__info">
+                    <dt class="detail__info-label">Catégorie</dt>
+                    <dd class="detail__info-value detail__info-value--category"></dd>
+                </div>
+                <div class="detail__info">
+                    <dt class="detail__info-label">Accès</dt>
+                    <dd class="detail__info-value detail__info-value--price"></dd>
+                </div>
+                <div class="detail__info">
+                    <dt class="detail__info-label">Référence</dt>
+                    <dd class="detail__info-value detail__info-value--ref"></dd>
+                </div>
+            </dl>
+
+            <section class="related">
+                <h3 class="related__title">Dans la même catégorie</h3>
+                <div class="related__grid"></div>
+            </section>
+        </main>
+    </div>
+
+    <script src="./src/main.js" defer></script>
 </body>
 </html>

@@ -1,23 +1,16 @@
 {
-  "name": "esgi-devtools-carlos-elio",
+  "name": "tailwind",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/CJG2/esgi-devtools-carlos-elio.git"
+    "dev": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
+    "build": "tailwindcss -i ./src/input.css -o ./dist/output.css --minify"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/CJG2/esgi-devtools-carlos-elio/issues"
-  },
-  "homepage": "https://github.com/CJG2/esgi-devtools-carlos-elio#readme",
   "devDependencies": {
     "@tailwindcss/cli": "4.3.3",
     "tailwindcss": "4.3.3"
