@@ -136,6 +136,8 @@ function afficherDetail() {
     detailDescription.textContent = outil.description;
     badgeCategorie.textContent = outil.categorie;
     badgePrix.textContent = prix;
+    badgePrix.classList.toggle('is-free', outil.gratuit);
+    badgePrix.classList.toggle('is-paid', !outil.gratuit);
     infoCategorie.textContent = outil.categorie;
     infoPrix.textContent = prix;
     infoRef.textContent = ref;

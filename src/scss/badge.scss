@@ -1,0 +1,24 @@
+$accent: #E69925;
+$fonce: #21201E;
+$clair: #FFF8ED;
+
+@mixin badge-variant($fond, $texte) {
+    background-color: $fond;
+    color: $texte;
+    border: 1px solid $fond;
+}
+
+.badge--price {
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    line-height: 1.333;
+    font-weight: 600;
+
+    &.is-free {
+        @include badge-variant($accent, $fonce);
+    }
+
+    &.is-paid {
+        @include badge-variant($fonce, $clair);
+    }
+}

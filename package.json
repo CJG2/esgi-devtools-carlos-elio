@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
-    "build": "tailwindcss -i ./src/input.css -o ./dist/output.css --minify"
+    "build": "tailwindcss -i ./src/input.css -o ./dist/output.css --minify",
+    "dev:sass": "sass src/scss/badge.scss dist/badge.css --watch",
+    "build:sass": "sass src/scss/badge.scss dist/badge.css --style=compressed --no-source-map"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +15,7 @@
   "type": "commonjs",
   "devDependencies": {
     "@tailwindcss/cli": "4.3.3",
+    "sass": "^1.106.1",
     "tailwindcss": "4.3.3"
   }
 }
