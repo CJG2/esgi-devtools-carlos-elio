@@ -15,6 +15,7 @@ const messageVide = document.querySelector('.tool-list__empty');
 const liste = document.querySelector('.tool-list');
 
 const detailTitre = document.querySelector('.detail__title');
+const detailLink = document.querySelector('.detail__open');
 const detailDescription = document.querySelector('.detail__description');
 const badgeCategorie = document.querySelector('.badge--category');
 const badgePrix = document.querySelector('.badge--price');
@@ -189,6 +190,18 @@ boutonGratuit.addEventListener('click', function () {
     boutonGratuit.classList.toggle('toggle--active');
     boutonGratuit.setAttribute('aria-pressed', gratuitsUniquement);
     afficherListe();
+});
+
+detailLink.addEventListener('click', function (event) {
+    // On empêche le lien de suivre son href="#"
+    event.preventDefault();
+
+    // Certains outils n'ont pas de lien (lien: null dans le JSON)
+    if (outilSelectionne.lien) {
+        window.open(outilSelectionne.lien, '_blank');
+    } else {
+        alert("Cet outil n'a pas de lien.");
+    }
 });
 
 fetch('./src/datas/outils.json')
