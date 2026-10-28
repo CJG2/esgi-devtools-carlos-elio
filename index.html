@@ -4,79 +4,116 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catalogue d'outils</title>
+    <link rel="stylesheet" href="./dist/output.css" />
 </head>
-<body class="page">
+<body class="page h-screen flex flex-col bg-clair text-fonce font-sans">
     <header class="header">
         <h1 class="header__title">DevTools</h1>
     </header>
 
-    <div class="layout">
-        <aside class="sidebar">
-            <div class="sidebar__top">
-                <div class="sidebar__heading">
-                    <h2 class="sidebar__title">Catalogue</h2>
-                    <span class="sidebar__count"></span>
+    <div class="layout flex flex-1 min-h-0">
+        <aside class="sidebar w-115 shrink-0 flex flex-col border-r border-fonce/15">
+            <div class="sidebar__top flex flex-col gap-4 px-8 pt-8 pb-5 border-b border-fonce/15">
+                <div class="sidebar__heading flex items-baseline justify-between">
+                    <h2 class="sidebar__title font-display font-extrabold text-4xl tracking-tight">Catalogue</h2>
+                    <span class="sidebar__count text-sm text-fonce/70"></span>
                 </div>
 
-                <label class="search">
-                    <span class="search__label">Rechercher un outil</span>
-                    <input class="search__input" type="search" placeholder="Rechercher un outil…">
+                <label class="search flex items-center gap-2.5 h-12 px-4 rounded-xl bg-white border border-fonce/20 focus-within:border-fonce">
+                    <svg class="size-4.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                        <circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path>
+                    </svg>
+                    <span class="search__label sr-only">Rechercher un outil</span>
+                    <input class="search__input flex-1 bg-transparent outline-none text-[15px] placeholder:text-fonce/60" type="search" placeholder="Rechercher un outil…">
                 </label>
 
-                <div class="filters">
-                    <button class="filters__chip filters__chip--active" type="button" aria-pressed="true" data-categorie="Tous">Tous</button>
+                <div class="filters flex flex-wrap gap-2">
+                    <button class="filters__chip h-9 px-3.5 rounded-full border border-fonce/50 text-[13px] font-medium cursor-pointer bg-fonce text-clair aria-pressed:font-semibold" type="button" aria-pressed="true" data-categorie="Tous">Tous</button>
                 </div>
 
-                <button class="toggle" type="button" aria-pressed="false">
-                    <span class="toggle__switch"></span>
+                <button class="toggle group self-start flex items-center gap-2.5 min-h-8 text-sm cursor-pointer" type="button" aria-pressed="false">
+                    <span class="toggle__switch flex w-10 h-6 p-0.75 rounded-full bg-fonce/20 transition-colors group-aria-pressed:bg-accent"></span>
                     Gratuits uniquement
                 </button>
             </div>
 
-            <div class="sidebar__content">
-                <p class="tool-list__empty" hidden>Aucun outil ne correspond à ces filtres.</p>
-
-                <ul class="tool-list"></ul>
+            <div class="sidebar__content flex-1 min-h-0 overflow-y-auto px-4 pt-3 pb-6">
+                <p class="tool-list__empty py-12 px-4 text-center text-[15px] text-fonce/70" hidden>Aucun outil ne correspond à ces filtres.</p>
+                <ul class="tool-list flex flex-col gap-1">
+                    <li>
+                        <button class="tool-list__item group w-full flex items-center gap-3.5 px-4 py-3.5 rounded-2xl text-left cursor-pointer bg-fonce " type="button" aria-current="false" data-id="1">
+                            <span class="flex-1 min-w-0 flex flex-col gap-0.5">
+                                <span class="font-semibold text-clair">SnippetBox</span>
+                                <span class="truncate text-[13px] text-clair group-aria-current:text-clair/70">Classer de petits extraits de code…</span>
+                            </span>
+                            <span class="text-xs font-medium text-accent group-aria-current:font-semibold">Code</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="tool-list__item group w-full flex items-center gap-3.5 px-4 py-3.5 rounded-2xl text-left cursor-pointer" type="button" aria-current="false" data-id="1">
+                            <span class="flex-1 min-w-0 flex flex-col gap-0.5">
+                                <span class="font-semibold">SnippetBox</span>
+                                <span class="truncate text-xs text-fonce/70 group-aria-current:text-clair/70">Classer de petits extraits de code…</span>
+                            </span>
+                            <span class="text-xs font-medium text-fonce/70 group-aria-current:text-accent group-aria-current:font-semibold">Code</span>
+                        </button>
+                    </li>
+                </ul>
             </div>
         </aside>
 
-        <main class="detail">
-            <div class="detail__header">
-                <div class="detail__heading">
-                    <div class="detail__badges">
-                        <span class="badge badge--category"></span>
-                        <span class="badge badge--price"></span>
+        <main class="detail flex-1 min-w-0 overflow-y-auto px-18 py-14">
+            <div class="max-w-195 flex flex-col gap-8">
+
+                <div class="detail__header">
+                    <div class="detail__heading flex flex-col gap-3.5">
+                        <div class="detail__badges flex gap-2">
+                            <span class="badge badge--category h-7 px-3 flex items-center rounded-full border border-fonce text-xs font-semibold">Code</span>
+                            <span class="badge badge--price h-7 px-3 flex items-center rounded-full bg-accent text-xs font-semibold">Gratuit</span>
+                        </div>
+                        <h3 class="detail__title font-display font-extrabold text-7xl tracking-tighter">SnippetBox</h3>
                     </div>
-                    <h3 class="detail__title"></h3>
                 </div>
+
+                <p class="detail__description max-w-170 text-2xl">Classer de petits extraits de code pour les retrouver rapidement.</p>
+
+                <div class="detail__actions flex gap-3">
+                    <a class="btn btn--primary detail__open h-13 px-6.5 flex items-center gap-2.5 rounded-full bg-accent font-semibold transition hover:brightness-95" href="#">
+                        Ouvrir l'outil
+                        <svg class="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"></path></svg>
+                    </a>
+                    <button class="btn btn--secondary detail__save h-13 px-5.5 flex items-center gap-2.5 rounded-full border border-fonce font-semibold cursor-pointer transition hover:bg-fonce/5" type="button">
+                        <svg class="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"></path></svg>
+                        Enregistrer
+                    </button>
+                </div>
+
+                <dl class="detail__infos grid grid-cols-3 gap-px rounded-2xl overflow-hidden border border-fonce/15 bg-fonce/15">
+                    <div class="detail__info flex flex-col gap-1.5 px-5.5 py-5 bg-clair">
+                        <dt class="detail__info-label text-xs uppercase tracking-widest text-fonce/70">Catégorie</dt>
+                        <dd class="detail__info-value detail__info-value--category text-lg font-semibold">Code</dd>
+                    </div>
+                    <div class="detail__info flex flex-col gap-1.5 px-5.5 py-5 bg-clair">
+                        <dt class="detail__info-label text-xs uppercase tracking-widest text-fonce/70">Accès</dt>
+                        <dd class="detail__info-value detail__info-value--price text-lg font-semibold">Gratuit</dd>
+                    </div>
+                    <div class="detail__info flex flex-col gap-1.5 px-5.5 py-5 bg-clair">
+                        <dt class="detail__info-label text-xs uppercase tracking-widest text-fonce/70">Référence</dt>
+                        <dd class="detail__info-value detail__info-value--ref text-lg font-semibold">#01</dd>
+                    </div>
+                </dl>
+
+                <section class="related flex flex-col gap-4 pt-2">
+                    <h3 class="related__title font-display font-bold text-2xl tracking-tight">Dans la même catégorie</h3>
+                    <div class="related__grid grid grid-cols-3 gap-3">
+                        <button class="related__card flex flex-col gap-2 p-4.5 rounded-2xl border border-fonce/20 bg-white text-left cursor-pointer transition hover:border-fonce hover:-translate-y-0.5" type="button">
+                            <span class="font-semibold">JSONView</span>
+                            <span class="text-xs text-fonce/70">Lire et mettre en forme des données JSON pendant le développement.</span>
+                        </button>
+                    </div>
+                </section>
+
             </div>
-
-            <p class="detail__description"></p>
-
-            <div class="detail__actions">
-                <a class="btn btn--primary detail__open" href="#">Ouvrir l'outil</a>
-                <button class="btn btn--secondary detail__save" type="button">Enregistrer</button>
-            </div>
-
-            <dl class="detail__infos">
-                <div class="detail__info">
-                    <dt class="detail__info-label">Catégorie</dt>
-                    <dd class="detail__info-value detail__info-value--category"></dd>
-                </div>
-                <div class="detail__info">
-                    <dt class="detail__info-label">Accès</dt>
-                    <dd class="detail__info-value detail__info-value--price"></dd>
-                </div>
-                <div class="detail__info">
-                    <dt class="detail__info-label">Référence</dt>
-                    <dd class="detail__info-value detail__info-value--ref"></dd>
-                </div>
-            </dl>
-
-            <section class="related">
-                <h3 class="related__title">Dans la même catégorie</h3>
-                <div class="related__grid"></div>
-            </section>
         </main>
     </div>
 
