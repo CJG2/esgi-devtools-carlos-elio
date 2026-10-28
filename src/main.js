@@ -36,7 +36,7 @@ function afficherFiltres() {
 
     // On crée un bouton par catégorie (le bouton "Tous" est déjà dans le HTML)
     for (let i = 0; i < categories.length; i++) {
-        zoneFiltres.innerHTML += `<button class="filters__chip" type="button" aria-pressed="false" data-categorie="${categories[i]}">${categories[i]}</button>`;
+                zoneFiltres.innerHTML += `<button class="filters__chip h-9 px-3.5 rounded-full border border-fonce/20 text-[13px] font-medium cursor-pointer transition-colors hover:border-fonce aria-pressed:bg-fonce aria-pressed:border-fonce aria-pressed:text-clair aria-pressed:font-semibold" type="button" aria-pressed="false" data-categorie="${categories[i]}">${categories[i]}</button>`;
     }
 
     // On ajoute un clic sur chaque bouton
@@ -94,19 +94,19 @@ function afficherListe() {
     for (let i = 0; i < outilsFiltres.length; i++) {
         const outil = outilsFiltres[i];
 
-        let classe = 'tool-row';
+        let classe = 'tool-row group w-full flex items-center gap-3.5 px-4 py-3.5 rounded-2xl border-fonce/15 text-left cursor-pointer text-fonce';
         if (outilSelectionne && outil.id === outilSelectionne.id) {
-            classe = 'tool-row tool-row--selected';
+            classe = 'tool-row tool-row--selected group w-full flex items-center gap-3.5 px-4 py-3.5 rounded-2xl text-left cursor-pointer bg-fonce text-white';
         }
 
         liste.innerHTML += `
             <li class="tool-list__item">
                 <button class="${classe}" type="button" data-id="${outil.id}">
-                    <span class="tool-row__body">
-                        <span class="tool-row__name">${outil.nom}</span>
-                        <span class="tool-row__description">${outil.description}</span>
+                    <span class="tool-row__body flex-1 min-w-0 flex flex-col gap-0.5">
+                        <span class="tool-row__name font-semibold">${outil.nom}</span>
+                        <span class="tool-row__description truncate text-xs">${outil.description}</span>
                     </span>
-                    <span class="tool-row__meta">${outil.categorie}</span>
+                    <span class="tool-row__meta text-xs text-accent font-semibold">${outil.categorie}</span>
                 </button>
             </li>`;
     }

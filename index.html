@@ -28,37 +28,20 @@
                 </label>
 
                 <div class="filters flex flex-wrap gap-2">
-                    <button class="filters__chip h-9 px-3.5 rounded-full border border-fonce/50 text-[13px] font-medium cursor-pointer bg-fonce text-clair aria-pressed:font-semibold" type="button" aria-pressed="true" data-categorie="Tous">Tous</button>
+                    <button class="filters__chip h-9 px-3.5 rounded-full border border-fonce/20 text-[13px] font-medium cursor-pointer transition-colors hover:border-fonce aria-pressed:bg-fonce aria-pressed:border-fonce aria-pressed:text-clair aria-pressed:font-semibold" type="button" aria-pressed="true" data-categorie="Tous">Tous</button>
                 </div>
 
                 <button class="toggle group self-start flex items-center gap-2.5 min-h-8 text-sm cursor-pointer" type="button" aria-pressed="false">
-                    <span class="toggle__switch flex w-10 h-6 p-0.75 rounded-full bg-fonce/20 transition-colors group-aria-pressed:bg-accent"></span>
+                    <span class="toggle__switch flex w-10 h-6 p-0.75 rounded-full bg-fonce/20 transition-colors group-aria-pressed:bg-accent">
+                        <span class="size-4.5 rounded-full bg-clair transition-transform group-aria-pressed:translate-x-4 group-aria-pressed:bg-fonce"></span>
+                    </span>
                     Gratuits uniquement
                 </button>
             </div>
 
             <div class="sidebar__content flex-1 min-h-0 overflow-y-auto px-4 pt-3 pb-6">
                 <p class="tool-list__empty py-12 px-4 text-center text-[15px] text-fonce/70" hidden>Aucun outil ne correspond à ces filtres.</p>
-                <ul class="tool-list flex flex-col gap-1">
-                    <li>
-                        <button class="tool-list__item group w-full flex items-center gap-3.5 px-4 py-3.5 rounded-2xl text-left cursor-pointer bg-fonce " type="button" aria-current="false" data-id="1">
-                            <span class="flex-1 min-w-0 flex flex-col gap-0.5">
-                                <span class="font-semibold text-clair">SnippetBox</span>
-                                <span class="truncate text-[13px] text-clair group-aria-current:text-clair/70">Classer de petits extraits de code…</span>
-                            </span>
-                            <span class="text-xs font-medium text-accent group-aria-current:font-semibold">Code</span>
-                        </button>
-                    </li>
-                    <li>
-                        <button class="tool-list__item group w-full flex items-center gap-3.5 px-4 py-3.5 rounded-2xl text-left cursor-pointer" type="button" aria-current="false" data-id="1">
-                            <span class="flex-1 min-w-0 flex flex-col gap-0.5">
-                                <span class="font-semibold">SnippetBox</span>
-                                <span class="truncate text-xs text-fonce/70 group-aria-current:text-clair/70">Classer de petits extraits de code…</span>
-                            </span>
-                            <span class="text-xs font-medium text-fonce/70 group-aria-current:text-accent group-aria-current:font-semibold">Code</span>
-                        </button>
-                    </li>
-                </ul>
+                <ul class="tool-list flex flex-col gap-3"></ul>
             </div>
         </aside>
 
