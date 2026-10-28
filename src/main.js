@@ -7,6 +7,9 @@ let recherche = '';
 let gratuitsUniquement = false;
 let outilSelectionne = null;
 
+// Les id des outils enregistrés
+let outilsEnregistres = [];
+
 const compteur = document.querySelector('.sidebar__count');
 const champRecherche = document.querySelector('.search__input');
 const zoneFiltres = document.querySelector('.filters');
@@ -23,6 +26,13 @@ const infoCategorie = document.querySelector('.detail__info-value--category');
 const infoPrix = document.querySelector('.detail__info-value--price');
 const infoRef = document.querySelector('.detail__info-value--ref');
 const zoneSimilaires = document.querySelector('.related__grid');
+const boutonEnregistrer = document.querySelector('.detail__save');
+const iconeEnregistrer = document.querySelector('.detail__save-icon');
+const texteEnregistrer = document.querySelector('.detail__save-text');
+
+// Modal du détail (mobile / tablette)
+const detail = document.querySelector('.detail');
+const boutonFermer = document.querySelector('.detail__close');
 
 function afficherFiltres() {
     // On récupère chaque catégorie une seule fois
@@ -94,7 +104,7 @@ function afficherListe() {
     for (let i = 0; i < outilsFiltres.length; i++) {
         const outil = outilsFiltres[i];
 
-        let classe = 'tool-row group w-full flex items-center gap-3.5 px-4 py-3.5 rounded-2xl border-fonce/15 text-left cursor-pointer text-fonce';
+        let classe = 'tool-row group w-full flex items-center gap-3.5 px-4 py-3.5 rounded-2xl border-fonce/15 text-left cursor-pointer text-fonce hover:bg-fonce/10 transition-all';
         if (outilSelectionne && outil.id === outilSelectionne.id) {
             classe = 'tool-row tool-row--selected group w-full flex items-center gap-3.5 px-4 py-3.5 rounded-2xl text-left cursor-pointer bg-fonce text-white';
         }
@@ -115,6 +125,7 @@ function afficherListe() {
     for (let i = 0; i < lignes.length; i++) {
         lignes[i].addEventListener('click', function () {
             selectionnerOutil(Number(lignes[i].dataset.id));
+            ouvrirModal();
         });
     }
 }
@@ -142,6 +153,7 @@ function afficherDetail() {
     infoPrix.textContent = prix;
     infoRef.textContent = ref;
 
+    afficherBoutonEnregistrer();
     afficherSimilaires();
 }
 
@@ -155,10 +167,10 @@ function afficherSimilaires() {
 
         if (outil.categorie === outilSelectionne.categorie && outil.id !== outilSelectionne.id && nombre < 3) {
             zoneSimilaires.innerHTML += `
-                <button class="cursor-pointer related-card p-4 bg-white rounded-xl border border-fonce transition hover:-translate-y-2" type="button" data-id="${outil.id}">
-                    <span class="related-card__name">${outil.nom}</span>
-                    <span class="related-card__description">${outil.description}</span>
-                    <div class="mt-4 w-full"><span class="px-4 py-2 rounded-2xl bg-accent">Voir l'outil</span></div>
+                <button class="related-card group flex flex-col gap-2 p-4.5 rounded-2xl border border-fonce/20 bg-white text-left cursor-pointer transition hover:border-fonce hover:-translate-y-1" type="button" data-id="${outil.id}">
+                    <span class="related-card__name font-semibold">${outil.nom}</span>
+                    <span class="related-card__description text-sm text-fonce/70">${outil.description}</span>
+                    <span class="related-card__link self-start mt-auto px-3.5 py-1.5 rounded-full bg-accent text-xs font-semibold">Voir l'outil</span>
                 </button>`;
             nombre++;
         }
@@ -168,6 +180,8 @@ function afficherSimilaires() {
     for (let i = 0; i < cartes.length; i++) {
         cartes[i].addEventListener('click', function () {
             selectionnerOutil(Number(cartes[i].dataset.id));
+            // On remonte en haut du détail pour voir le nouvel outil
+            detail.scrollTop = 0;
         });
     }
 }
@@ -182,6 +196,38 @@ function selectionnerOutil(id) {
     afficherListe();
     afficherDetail();
 }
+
+// ===== Modal (en dessous de 800px) =====
+// Sur PC, la classe max-desktop:hidden n'a aucun effet : le détail reste toujours affiché.
+
+function ouvrirModal() {
+    detail.classList.remove('max-desktop:hidden');
+    // On bloque le scroll de la page derrière le modal
+    document.body.classList.add('overflow-hidden');
+    detail.scrollTop = 0;
+}
+
+function fermerModal() {
+    detail.classList.add('max-desktop:hidden');
+    document.body.classList.remove('overflow-hidden');
+}
+
+// Fermer avec le bouton
+boutonFermer.addEventListener('click', fermerModal);
+
+// Fermer en cliquant sur le fond sombre (autour du panneau)
+detail.addEventListener('click', function (event) {
+    if (event.target === detail) {
+        fermerModal();
+    }
+});
+
+// Fermer avec la touche Échap
+document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') {
+        fermerModal();
+    }
+});
 
 champRecherche.addEventListener('input', function () {
     recherche = champRecherche.value;
@@ -205,6 +251,39 @@ detailLink.addEventListener('click', function (event) {
     } else {
         alert("Cet outil n'a pas de lien.");
     }
+});
+
+// ===== Bouton "Enregistrer" =====
+
+// Met à jour l'icône et le texte selon si l'outil affiché est enregistré ou non
+function afficherBoutonEnregistrer() {
+    const estEnregistre = outilsEnregistres.includes(outilSelectionne.id);
+
+    if (estEnregistre) {
+        iconeEnregistrer.classList.replace('bi-bookmark', 'bi-bookmark-fill');
+        texteEnregistrer.textContent = 'Enregistré';
+    } else {
+        iconeEnregistrer.classList.replace('bi-bookmark-fill', 'bi-bookmark');
+        texteEnregistrer.textContent = 'Enregistrer';
+    }
+
+    boutonEnregistrer.setAttribute('aria-pressed', estEnregistre);
+}
+
+boutonEnregistrer.addEventListener('click', function () {
+    const id = outilSelectionne.id;
+
+    if (outilsEnregistres.includes(id)) {
+        // Déjà enregistré -> on le retire de la liste
+        outilsEnregistres = outilsEnregistres.filter(function (idEnregistre) {
+            return idEnregistre !== id;
+        });
+    } else {
+        // Pas encore enregistré -> on l'ajoute
+        outilsEnregistres.push(id);
+    }
+
+    afficherBoutonEnregistrer();
 });
 
 fetch('./src/datas/outils.json')

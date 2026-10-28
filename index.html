@@ -4,26 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catalogue d'outils</title>
+    <!-- Bootstrap Icons : <i class="bi bi-nom-de-l-icone"></i> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
     <link rel="stylesheet" href="./dist/output.css" />
     <link rel="stylesheet" href="./dist/badge.css" />
 </head>
-<body class="page h-screen flex flex-col bg-clair text-fonce font-sans">
-    <header class="header w-full bg-fonce px-10 py-6 fixed">
+<body class="page min-h-screen desktop:h-screen flex flex-col bg-clair text-fonce font-sans">
+    <header class="header w-full bg-fonce px-5 md:px-10 py-6 fixed z-40">
         <h1 class="header__title text-accent font-display font-extrabold text-xl">DevTools</h1>
     </header>
 
-    <div class="layout flex flex-1 min-h-0 mt-16">  
-        <aside class="sidebar w-1/3 min-w-92 shrink-0 flex flex-col border-r border-fonce/15">
-            <div class="sidebar__top flex flex-col gap-4 px-8 pt-8 pb-5 border-b border-fonce/15">
+    <div class="layout flex flex-1 desktop:min-h-0 mt-16">
+        <aside class="sidebar w-full desktop:w-1/3 desktop:min-w-92 shrink-0 flex flex-col desktop:border-r border-fonce/15">
+            <div class="sidebar__top flex flex-col gap-4 px-5 md:px-8 pt-8 pb-5 border-b border-fonce/15">
                 <div class="sidebar__heading flex items-center justify-between">
-                    <h2 class="sidebar__title font-display font-extrabold text-4xl tracking-tight">Catalogue</h2>
+                    <h2 class="sidebar__title font-display font-extrabold text-3xl md:text-4xl tracking-tight">Catalogue</h2>
                     <span class="sidebar__count text-sm text-fonce/70"></span>
                 </div>
 
                 <label class="search flex items-center gap-2.5 h-12 px-4 rounded-xl bg-white border border-fonce/20 focus-within:border-fonce">
-                    <svg class="size-4.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-                        <circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path>
-                    </svg>
+                    <i class="bi bi-search shrink-0" aria-hidden="true"></i>
                     <span class="search__label sr-only">Rechercher un outil</span>
                     <input class="search__input flex-1 bg-transparent outline-none text-[15px] placeholder:text-fonce/60" type="search" placeholder="Rechercher un outil…">
                 </label>
@@ -40,58 +40,62 @@
                 </button>
             </div>
 
-            <div class="sidebar__content flex-1 min-h-0 overflow-y-auto px-4 pt-3 pb-6">
+            <div class="sidebar__content flex-1 desktop:min-h-0 desktop:overflow-y-auto px-2 md:px-4 pt-3 pb-6">
                 <p class="tool-list__empty py-12 px-4 text-center text-[15px] text-fonce/70" hidden>Aucun outil ne correspond à ces filtres.</p>
                 <ul class="tool-list flex flex-col gap-3"></ul>
             </div>
         </aside>
 
-        <main class="detail w-2/3 min-w-0 overflow-y-auto px-10 py-14">
-            <div class="max-w-195 flex flex-col gap-8">
-
-                <div class="detail__header">
+        <!-- Sur PC : colonne de droite. En dessous de 800px : modal, caché par défaut (max-desktop:hidden) -->
+        <main class="detail max-desktop:hidden max-desktop:fixed max-desktop:inset-0 max-desktop:z-50 max-desktop:bg-fonce/60 overflow-y-auto desktop:w-2/3 min-w-0 desktop:px-10 desktop:py-14">
+            <div class="detail__panel max-w-195 flex flex-col gap-6 md:gap-8 max-desktop:bg-clair max-desktop:min-h-full max-desktop:px-5 max-desktop:py-6">
+                
+                <div class="detail__header flex justify-between">
                     <div class="detail__heading flex flex-col gap-3.5">
                         <div class="detail__badges flex gap-2">
                             <span class="badge badge--category h-7 px-3 flex items-center rounded-full border border-fonce text-xs font-semibold"></span>
                             <span class="badge badge--price is-free h-7 px-3 flex items-center"></span>
                         </div>
-                        <h3 class="detail__title font-display font-extrabold text-7xl tracking-tighter"></h3>
+                        <h3 class="detail__title font-display font-extrabold text-5xl xl:text-7xl tracking-tighter break-words"></h3>
                     </div>
+                    <button class="detail__close desktop:hidden size-11 flex items-center justify-center rounded-full border border-fonce/20 cursor-pointer" type="button" aria-label="Fermer le détail">
+                        <i class="bi bi-x-lg text-lg" aria-hidden="true"></i>
+                    </button>
                 </div>
 
-                <p class="detail__description max-w-170 text-2xl"></p>
+                <p class="detail__description max-w-170 text-lg md:text-2xl"></p>
 
                 <img src="/assets/projet-03.svg" alt="image de présentation de l'outil" class="w-full h-auto rounded-xl" />
 
-                <div class="detail__actions flex gap-3">
+                <div class="detail__actions flex flex-wrap gap-3">
                     <a class="btn btn--primary detail__open h-13 px-6.5 flex items-center gap-2.5 rounded-full bg-accent font-semibold transition hover:brightness-95" href="#">
                         Ouvrir l'outil
-                        <svg class="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"></path></svg>
+                        <i class="bi bi-arrow-up-right" aria-hidden="true"></i>
                     </a>
-                    <button class="btn btn--secondary detail__save h-13 px-5.5 flex items-center gap-2.5 rounded-full border border-fonce font-semibold cursor-pointer transition hover:bg-fonce/5" type="button">
-                        <svg class="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"></path></svg>
-                        Enregistrer
+                    <button class="btn btn--secondary detail__save h-13 px-5.5 flex items-center gap-2.5 rounded-full border border-fonce font-semibold cursor-pointer transition hover:bg-fonce/5" type="button" aria-pressed="false">
+                        <i class="detail__save-icon bi bi-bookmark" aria-hidden="true"></i>
+                        <span class="detail__save-text">Enregistrer</span>
                     </button>
                 </div>
 
                 <dl class="detail__infos grid grid-cols-3 gap-px rounded-2xl overflow-hidden border border-fonce/15 bg-fonce/15">
-                    <div class="detail__info flex flex-col gap-1.5 px-5.5 py-5 bg-clair">
+                    <div class="detail__info flex flex-col gap-1.5 px-3 py-4 md:px-5.5 md:py-5 bg-clair">
                         <dt class="detail__info-label text-xs uppercase tracking-widest text-fonce/70">Catégorie</dt>
-                        <dd class="detail__info-value detail__info-value--category text-lg font-semibold"></dd>
+                        <dd class="detail__info-value detail__info-value--category text-base md:text-lg font-semibold"></dd>
                     </div>
-                    <div class="detail__info flex flex-col gap-1.5 px-5.5 py-5 bg-clair">
+                    <div class="detail__info flex flex-col gap-1.5 px-3 py-4 md:px-5.5 md:py-5 bg-clair">
                         <dt class="detail__info-label text-xs uppercase tracking-widest text-fonce/70">Accès</dt>
-                        <dd class="detail__info-value detail__info-value--price text-lg font-semibold"></dd>
+                        <dd class="detail__info-value detail__info-value--price text-base md:text-lg font-semibold"></dd>
                     </div>
-                    <div class="detail__info flex flex-col gap-1.5 px-5.5 py-5 bg-clair">
+                    <div class="detail__info flex flex-col gap-1.5 px-3 py-4 md:px-5.5 md:py-5 bg-clair">
                         <dt class="detail__info-label text-xs uppercase tracking-widest text-fonce/70">Référence</dt>
-                        <dd class="detail__info-value detail__info-value--ref text-lg font-semibold"></dd>
+                        <dd class="detail__info-value detail__info-value--ref text-base md:text-lg font-semibold"></dd>
                     </div>
                 </dl>
 
                 <section class="related flex flex-col gap-4 pt-2">
                     <h3 class="related__title font-display font-bold text-2xl tracking-tight">Dans la même catégorie</h3>
-                    <div class="related__grid grid grid-cols-1 min-[800px]:grid-cols-2 min-[1000px]:grid-cols-3 gap-3">
+                    <div class="related__grid grid grid-cols-[repeat(auto-fill,minmax(220px,1fr))] gap-3">
                     </div>
                 </section>
 

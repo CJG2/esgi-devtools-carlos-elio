@@ -4,4 +4,7 @@
     --color-accent: #E69925;
     --color-clair: #FFF8ED;
     --color-fonce: #21201E;
+
+    /* Point de rupture perso : desktop: (>= 800px) et max-desktop: (< 800px) */
+    --breakpoint-desktop: 800px;
 }
